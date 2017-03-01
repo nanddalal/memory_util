@@ -26,6 +26,7 @@ y = slim.conv2d(x, out_channels, kernel_size)
 
 gpu_options = tf.GPUOptions(
     allow_growth=True,
+    # per_process_gpu_memory_fraction=0.05,
     )
 config = tf.ConfigProto(
     allow_soft_placement=True,
@@ -55,7 +56,7 @@ def run_and_analyze(in_shape):
 
   print 'expected mem usage (MB): ', expected_mem / BYTES_PER_MB
   print 'peak     mem usage (MB): ', peak_mem / BYTES_PER_MB
-  print 'peak:expected mem ratio: ', peak_mem / expected_mem
+  print 'peak:expected mem ratio: ', peak_mem / float(expected_mem)
   print memory_util.print_memory_timeline(stderr)
   memory_util.plot_memory_timeline(plt, stderr)
 
