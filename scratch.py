@@ -3,6 +3,8 @@ memory_util.vlog(1)
 
 from utils.plotting.plotweb import *
 
+import os; os.environ["TF_CUDNN_USE_AUTOTUNE"] = "0"
+
 import numpy as np
 import tensorflow as tf
 
@@ -11,15 +13,16 @@ slim = tf.contrib.slim
 BYTES_PER_MB = float(1024*1024)
 
 in_shapes = [
-    (1, 256, 256, 3),
-    (2, 256, 256, 3),
-    (4, 256, 256, 3),
-    (8, 256, 256, 3),
-    (16, 256, 256, 3),
+    # (1, 256, 256, 3),
+    # (2, 256, 256, 3),
+    # (4, 256, 256, 3),
+    # (8, 256, 256, 3),
+    # (16, 256, 256, 3),
+    (16, 63, 63, 64),
     ]
 kernel_size = 3
-in_channels = 3
-out_channels = 64
+in_channels = 64
+out_channels = 192
 
 x = tf.placeholder(tf.float32, (None, None, None, in_channels))
 y = slim.conv2d(x, out_channels, kernel_size)
@@ -33,7 +36,7 @@ config = tf.ConfigProto(
     log_device_placement=False,
     gpu_options=gpu_options,
     )
-config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
+# config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
 sess = tf.Session(
     # graph=graph,
     config=config,
