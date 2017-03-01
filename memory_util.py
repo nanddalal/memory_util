@@ -226,8 +226,7 @@ def print_memory_timeline(log, gpu_only=False, ignore_less_than_bytes=0):
         total_memory += allocated_bytes
         print("%9d %42s %11d %11d %s"%(i, kernel_name, allocated_bytes, total_memory, allocator_type))
 
-import matplotlib.pyplot as plt
-def plot_memory_timeline(log, gpu_only=False, ignore_less_than_bytes=1000):
+def plot_memory_timeline(plt, log, gpu_only=False, ignore_less_than_bytes=1000):
       
     total_memory = 0
     timestamps = []
