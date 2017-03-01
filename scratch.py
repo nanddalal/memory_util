@@ -33,7 +33,7 @@ config = tf.ConfigProto(
     log_device_placement=False,
     gpu_options=gpu_options,
     )
-# config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
+config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
 sess = tf.Session(
     # graph=graph,
     config=config,
